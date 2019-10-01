@@ -117,7 +117,17 @@ rprompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment green black "%(!.%{%F{yellow}%}.)%n@%m"
+    if [[ $UID == 0 || $EUID == 0 ]]; then
+      prompt_segment green red "%n"
+    else
+      prompt_segment green black "%n"
+    fi
+    prompt_segment green black "@"
+    if [[ "$SSH_CONNECTION" != "" ]]; then
+      prompt_segment green yellow "%m"
+    else
+      prompt_segment green black "%m"
+    fi
   fi
 }
 
