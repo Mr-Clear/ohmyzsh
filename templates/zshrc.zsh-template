@@ -112,4 +112,4 @@ source /etc/zsh_command_not_found
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-/home/thomas/.oh-my-zsh/templates/zshrc.zsh-template
+
