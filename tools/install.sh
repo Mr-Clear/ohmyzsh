@@ -211,6 +211,27 @@ setup_shell() {
 	echo
 }
 
+# Ensure all required programs are installed
+checkPackages()
+{
+    unset MISSING
+
+    set +e
+
+    for PACKAGE in $1
+    do
+        if ! type $PACKAGE >/dev/null 2>&1; then
+            MISSING="$MISSING $PACKAGE"
+        fi
+    done
+
+    set -e
+
+    if [ -n "$MISSING" ]; then
+        sudo apt-get install $MISSING
+    fi
+}
+
 main() {
 	# Run as unattended if stdin is closed
 	if [ ! -t 0 ]; then
@@ -228,6 +249,8 @@ main() {
 	done
 
 	setup_color
+	
+	checkPackages "zsh fzf"
 
 	if ! command_exists zsh; then
 		echo "${YELLOW}Zsh is not installed.${RESET} Please install zsh first."
