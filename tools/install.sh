@@ -30,11 +30,10 @@
 #   sh install.sh --unattended
 #
 set -e
-
 # Default settings
 ZSH=${ZSH:-~/.oh-my-zsh}
-REPO=${REPO:-robbyrussell/oh-my-zsh}
-REMOTE=${REMOTE:-https://github.com/${REPO}.git}
+REPO=${REPO:-Thomas/omz.git}
+REMOTE=${REMOTE:-https://git.klierlinge.de/${REPO}}
 BRANCH=${BRANCH:-master}
 
 # Other options
