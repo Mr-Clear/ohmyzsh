@@ -256,7 +256,7 @@ main() {
 
 	setup_color
 	
-	checkPackages "zsh fzf"
+	checkPackages "zsh fzf tmux"
 
 	if ! command_exists zsh; then
 		echo "${YELLOW}Zsh is not installed.${RESET} Please install zsh first."
