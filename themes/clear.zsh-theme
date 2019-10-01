@@ -131,6 +131,12 @@ prompt_context() {
   fi
 }
 
+prompt_level() {
+  if [[ $SHLVL > 1 ]]; then
+    prompt_segment white black $SHLVL
+  fi
+}
+
 git_info() {
   # Exit if not inside a Git repository
   ! git rev-parse --is-inside-work-tree > /dev/null 2>&1 && return
@@ -349,6 +355,7 @@ build_prompt() {
   PROMPTLEFT=0
   prompt_virtualenv
   prompt_context
+  prompt_level
   prompt_dir
 #  prompt_git
   git_info
