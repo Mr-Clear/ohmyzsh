@@ -65,7 +65,7 @@ prompt_lsegment() {
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n "%B%{$bg%F{$CURRENT_BG}%}$LSEGMENT_SEPARATOR%{$fg%}%b"
+    echo -n "%{$bg%F{$CURRENT_BG}%}$LSEGMENT_SEPARATOR%{$fg%}"
   else
     echo -n "%{$bg%}%{$fg%}"
   fi
@@ -77,7 +77,7 @@ prompt_rsegment() {
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n "%B%F{$1}$RSEGMENT_SEPARATOR%b$fg$bg"
+    echo -n "%F{$1}$RSEGMENT_SEPARATOR$fg$bg"
   else
     echo -n "%{$bg%}%{$fg%}"
   fi
@@ -88,7 +88,7 @@ prompt_segment() {
   [[ $PROMPTLEFT -eq 0 ]] && prompt_lsegment $1 $2 $3 || prompt_rsegment $1 $2 $3
 }
 
-# End the lrft prompt, closing any open segments
+# End the left prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
     echo -n "%{%k%F{$CURRENT_BG}%}$LSEGMENT_SEPARATOR"
@@ -292,7 +292,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue black '%~'
+  prompt_segment blue grey '%~'
 }
 
 # Virtualenv: current working virtualenv
