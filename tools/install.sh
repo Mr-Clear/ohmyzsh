@@ -89,7 +89,7 @@ setup_ohmyzsh() {
 		exit 1
 	fi
 
-	git clone --depth=1 --branch "$BRANCH" "$REMOTE" "$ZSH" || {
+	git clone --recursive --depth=1 --branch "$BRANCH" "$REMOTE" "$ZSH" || {
 		error "git clone of oh-my-zsh repo failed"
 		exit 1
 	}
