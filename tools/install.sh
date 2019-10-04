@@ -250,12 +250,6 @@ installRequirements()
     rm -rf ~/pwerline-font
 }
 
-installPlugins()
-{
-    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
-}
-
 main() {
 	# Run as unattended if stdin is closed
 	if [ ! -t 0 ]; then
@@ -292,7 +286,6 @@ main() {
 	setup_ohmyzsh
 	setup_zshrc
 	setup_shell
-	installPlugins
 
 	printf "$GREEN"
 	cat <<-'EOF'
