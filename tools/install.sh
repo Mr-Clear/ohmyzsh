@@ -232,6 +232,17 @@ checkPackages()
     fi
 }
 
+installRequirements()
+{
+    checkPackages "zsh tmux"
+
+    # FZF
+    if ! [ -x "$(command -v fzf)" ] && ! [ -d "~/.fzf" ]; then
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install
+    fi
+}
+
 installPlugins()
 {
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
@@ -256,10 +267,7 @@ main() {
 
 	setup_color
 	
-	checkPackages "zsh tmux"
-	
-	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
+	installRequirements
 
 	if ! command_exists zsh; then
 		echo "${YELLOW}Zsh is not installed.${RESET} Please install zsh first."
