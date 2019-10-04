@@ -241,6 +241,13 @@ installRequirements()
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
         ~/.fzf/install
     fi
+
+    # Powerline Font
+    git clone --depth=1 https://github.com/powerline/fonts.git ~/pwerline-font
+    cd ~/pwerline-font
+    ./install.sh
+    cd -
+    rm -rf ~/pwerline-font
 }
 
 installPlugins()
