@@ -256,7 +256,10 @@ main() {
 
 	setup_color
 	
-	checkPackages "zsh fzf tmux"
+	checkPackages "zsh tmux"
+	
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
 
 	if ! command_exists zsh; then
 		echo "${YELLOW}Zsh is not installed.${RESET} Please install zsh first."
