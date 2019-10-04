@@ -355,7 +355,6 @@ build_prompt() {
   PROMPTLEFT=0
   prompt_virtualenv
   prompt_context
-  prompt_level
   prompt_dir
 #  prompt_git
   git_info
@@ -370,6 +369,7 @@ build_rprompt() {
   prompt_retval
   prompt_processes
   prompt_time
+  prompt_level
   rprompt_end
 }
 
