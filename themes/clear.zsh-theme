@@ -331,7 +331,14 @@ prompt_aws() {
 }
 
 prompt_time() {
-  prompt_segment magenta black '%D{%H:%M:%S}'
+  CURRENT_DATE=$(date +"%Y-%m-%d")
+  LAST_PROMPED_DATE=$(cat /dev/shm/last_prompted_date_$$ 2>/dev/null)
+  if [[ $CURRENT_DATE != $LAST_PROMPED_DATE ]]; then
+    prompt_segment magenta black '%D{%Y-%m-%d %H:%M:%S}'
+    echo $CURRENT_DATE > /dev/shm/last_prompted_date_$$
+  else
+    prompt_segment magenta black '%D{%H:%M:%S}'
+  fi
 }
 
 prompt_retval() {
