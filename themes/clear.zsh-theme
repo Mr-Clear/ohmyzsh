@@ -53,8 +53,8 @@ esac
   # what font the user is viewing this source code in. Do not replace the
   # escape sequence with a single literal character.
   # Do not change this! Do not make it '\u2b80'; that is the old, wrong code point.
-  LSEGMENT_SEPARATOR=$'\ue0b0'
-  RSEGMENT_SEPARATOR=$'\ue0b2'
+  LSEGMENT_SEPARATOR=%1{$'\ue0b0'%}
+  RSEGMENT_SEPARATOR=%1{$'\ue0b2'%}
 }
 
 # Begin a segment
@@ -62,24 +62,24 @@ esac
 # rendering default background/foreground.
 prompt_lsegment() {
   local bg fg
-  [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
-  [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  [[ -n $1 ]] && bg="%{%K{$1}%}" || bg="%{%k%}"
+  [[ -n $2 ]] && fg="%{%F{$2}%}" || fg="%{%f%}"
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n "%{$bg%F{$CURRENT_BG}%}$LSEGMENT_SEPARATOR%{$fg%}"
+    echo -n "$bg%{%F{$CURRENT_BG}%}$LSEGMENT_SEPARATOR$fg"
   else
-    echo -n "%{$bg%}%{$fg%}"
+    echo -n "$bg$fg"
   fi
   CURRENT_BG=$1
   [[ -n $3 ]] && echo -n $3
 }
 prompt_rsegment() {
   local bg fg
-  [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
-  [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  [[ -n $1 ]] && bg="%{%K{$1}%}" || bg="%{%k%}"
+  [[ -n $2 ]] && fg="%{%F{$2}%}" || fg="%{%f%}"
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n "%F{$1}$RSEGMENT_SEPARATOR$fg$bg"
+    echo -n "%{%F{$1}%}$RSEGMENT_SEPARATOR$fg$bg"
   else
-    echo -n "%{$bg%}%{$fg%}"
+    echo -n "$bg$fg"
   fi
   CURRENT_BG=$1
   [[ -n $3 ]] && echo -n $3
@@ -102,7 +102,7 @@ prompt_end() {
 # Start the right prompt, closing any open segments
 rprompt_start() {
   CURRENT_BG='invalid'
-  echo -n "%{%f%b%}"
+  echo -n "%f%b"
 }
 
 # End the right prompt, closing any open segments
@@ -144,12 +144,12 @@ git_info() {
   # Git branch/tag, or name-rev if on detached head
   local GIT_LOCATION=${$(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD)#(refs/heads/|tags/)}
 
-  local AHEAD="⇡NUM"
-  local BEHIND="⇣NUM"
-  local MERGING="%F{red}⚡︎%f"
-  local UNTRACKED="%F{black}●%f"
-  local MODIFIED="%F{red}●%f"
-  local STAGED="%F{green}●%f"
+  local AHEAD="%1{⇡%}NUM"
+  local BEHIND="%1{⇣%]NUM"
+  local MERGING="%1{%F{red}⚡︎%f%}"
+  local UNTRACKED="%1{%F{black}●%f%}"
+  local MODIFIED="%1{%F{red}●%f%}"
+  local STAGED="%1{%F{green}●%%}f"
 
   local -a DIVERGENCES
   local FLAGS
