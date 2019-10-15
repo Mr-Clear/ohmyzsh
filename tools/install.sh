@@ -228,6 +228,7 @@ checkPackages()
     set -e
 
     if [ -n "$MISSING" ]; then
+        echo Installing $MISSING
         if [[ $EUID -ne 0 ]]; then
             sudo apt-get install $MISSING
         else
