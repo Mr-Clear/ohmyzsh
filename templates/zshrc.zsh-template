@@ -85,16 +85,16 @@ export FZF_BASE="\${HOME}/.zshrc"
 source $ZSH/oh-my-zsh.sh
 source /etc/zsh_command_not_found
 
-### User configuration ###
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [[ $- == *i* ]] && [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
     print -z "tmux new-session -A -s \"ssh_tmux_$USER\"; exit \$?"
 fi
+
+### User configuration ###
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
 alias ll="ls -halFv --color=tty"
 
