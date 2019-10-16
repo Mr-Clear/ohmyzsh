@@ -124,7 +124,7 @@ setup_zshrc() {
 
 	echo "${GREEN}Using the Oh My Zsh template file and adding it to ~/.zshrc.${RESET}"
 
-	cp "$ZSH/templates/zshrc.zsh-template" ~/.zshrc
+	ln -s "$ZSH/templates/zshrc.zsh-template" ~/.zshrc
 	sed "/^export ZSH=/ c\\
 export ZSH=\"$ZSH\"
 " ~/.zshrc > ~/.zshrc-omztemp
