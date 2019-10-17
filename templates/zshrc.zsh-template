@@ -105,3 +105,9 @@ export TIME_STYLE=+"%Y-%m-%d %H:%M:%S"
 export EDITOR=nano
 export VISUAL=$EDITOR
 
+alias ll="ls -halFv --color=tty"
+
+# Run custom stuff
+if [ -f .zshrc2 ]; then
+    source .zshrc2
+fi
