@@ -1,12 +1,12 @@
 #!/bin/sh
 #
 # This script should be run via curl:
-#   sh -c "$(curl -fsSL https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh)"
+#   sh -c "$(curl -fsSL https://git.klierlinge.de/Thomas/omz/raw/Arch/tools/install.sh)"
 # or wget:
-#   sh -c "$(wget -qO- https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh)"
+#   sh -c "$(wget -qO- https://git.klierlinge.de/Thomas/omz/raw/Arch/tools/install.sh)"
 #
 # As an alternative, you can first download the install script and run it afterwards:
-#   wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+#   wget https://git.klierlinge.de/Thomas/omz/raw/Arch/tools/install.sh
 #   sh install.sh
 #
 # You can tweak the install behavior by setting variables when running the script. For
