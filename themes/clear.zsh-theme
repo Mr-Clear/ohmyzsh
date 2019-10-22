@@ -365,6 +365,7 @@ build_prompt() {
   prompt_dir
 #  prompt_git
   git_info
+  prompt_retval
   prompt_end
 }
 
@@ -373,7 +374,6 @@ build_rprompt() {
   RETVAL=$?
   PROMPTLEFT=1
   rprompt_start
-  prompt_retval
   prompt_processes
   prompt_time
   prompt_level
