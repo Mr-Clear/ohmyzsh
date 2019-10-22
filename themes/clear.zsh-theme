@@ -149,7 +149,7 @@ git_info() {
   local MERGING="%1{%F{red}⚡︎%f%}"
   local UNTRACKED="%1{%F{black}●%f%}"
   local MODIFIED="%1{%F{red}●%f%}"
-  local STAGED="%1{%F{green}●%%}f"
+  local STAGED="%1{%F{green}●%}%f"
 
   local -a DIVERGENCES
   local FLAGS
