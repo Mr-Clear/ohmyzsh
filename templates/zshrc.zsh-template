@@ -97,9 +97,10 @@ source /etc/zsh_command_not_found
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if [[ $- == *i* ]] && [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
-    print -z "tmux new-session -A -s \"ssh_tmux_$USER\"; exit \$?"
-fi
+### Offer to open tmux when in SSH ###
+# if [[ $- == *i* ]] && [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
+#     print -z "tmux new-session -A -s \"ssh_tmux_$USER\"; exit \$?"
+# fi
 
 alias ll="ls -halFv --color=tty"
 
