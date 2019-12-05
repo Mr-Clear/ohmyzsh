@@ -145,13 +145,13 @@ git_info() {
   local GIT_LOCATION=${$(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD)#(refs/heads/|tags/)}
 
   local AHEAD="%1{⇡%}NUM"
-  local BEHIND="%1{⇣%]NUM"
+  local BEHIND="%1{⇣%}NUM"
   local MERGING="%1{%F{red}⚡︎%f%}"
   local UNTRACKED="%1{%F{black}●%f%}"
   local MODIFIED="%1{%F{red}●%f%}"
   local STAGED="%1{%F{green}●%}%f"
 
-  local -a DIVERGENCES
+  local DIVERGENCES
   local FLAGS
 
   local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
