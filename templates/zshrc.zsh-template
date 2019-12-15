@@ -85,16 +85,6 @@ export FZF_BASE="\${HOME}/.zshrc"
 source $ZSH/oh-my-zsh.sh
 source /etc/zsh_command_not_found
 
-### User configuration ###
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-### User configuration ###
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ### Offer to open tmux when in SSH ###
@@ -111,3 +101,9 @@ export TIME_STYLE=+"%Y-%m-%d %H:%M:%S"
 export EDITOR=nano
 export VISUAL=$EDITOR
 
+alias ll="ls -halFv --color=tty"
+
+# Run custom stuff
+if [ -f .zshrc2 ]; then
+    source .zshrc2
+fi

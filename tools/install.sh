@@ -6,7 +6,7 @@
 #   sh -c "$(wget -qO- https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh)"
 #
 # As an alternative, you can first download the install script and run it afterwards:
-#   wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+#   wget https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh
 #   sh install.sh
 #
 # You can tweak the install behavior by setting variables when running the script. For
@@ -228,6 +228,7 @@ checkPackages()
     set -e
 
     if [ -n "$MISSING" ]; then
+        echo Installing $MISSING
         if [[ $EUID -ne 0 ]]; then
             sudo apt-get install $MISSING
         else
