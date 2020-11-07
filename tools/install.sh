@@ -1,12 +1,12 @@
 #!/bin/sh
 #
 # This script should be run via curl:
-#   sh -c "$(curl -fsSL https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh)"
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Mr-Clear/ohmyzsh/debian/tools/install.sh)"
 # or wget:
-#   sh -c "$(wget -qO- https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh)"
+#   sh -c "$(wget -qO- https://raw.githubusercontent.com/Mr-Clear/ohmyzsh/debian/tools/install.sh)"
 #
 # As an alternative, you can first download the install script and run it afterwards:
-#   wget https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh
+#   wget https://raw.githubusercontent.com/Mr-Clear/ohmyzsh/debian/tools/install.sh
 #   sh install.sh
 #
 # You can tweak the install behavior by setting variables when running the script. For
@@ -36,9 +36,9 @@
 set -e
 # Default settings
 ZSH=${ZSH:-~/.oh-my-zsh}
-REPO=${REPO:-Thomas/omz.git}
-REMOTE=${REMOTE:-https://git.klierlinge.de/${REPO}}
-BRANCH=${BRANCH:-master}
+REPO=${REPO:-Mr-Clear/ohmyzsh}
+REMOTE=${REMOTE:-https://github.com/${REPO}}
+BRANCH=${BRANCH:-debian}
 
 # Other options
 CHSH=${CHSH:-yes}
