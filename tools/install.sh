@@ -1,14 +1,12 @@
 #!/bin/sh
 #
 # This script should be run via curl:
-#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# or via wget:
-#   sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# or via fetch:
-#   sh -c "$(fetch -o - https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#   sh -c "$(curl -fsSL https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh)"
+# or wget:
+#   sh -c "$(wget -qO- https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh)"
 #
 # As an alternative, you can first download the install script and run it afterwards:
-#   wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+#   wget https://git.klierlinge.de/Thomas/omz/raw/master/tools/install.sh
 #   sh install.sh
 #
 # You can tweak the install behavior by setting variables when running the script. For
@@ -36,11 +34,10 @@
 #   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 #
 set -e
-
 # Default settings
 ZSH=${ZSH:-~/.oh-my-zsh}
-REPO=${REPO:-ohmyzsh/ohmyzsh}
-REMOTE=${REMOTE:-https://github.com/${REPO}.git}
+REPO=${REPO:-Thomas/omz.git}
+REMOTE=${REMOTE:-https://git.klierlinge.de/${REPO}}
 BRANCH=${BRANCH:-master}
 
 # Other options
@@ -145,6 +142,7 @@ setup_zshrc() {
 
 	echo "${GREEN}Using the Oh My Zsh template file and adding it to ~/.zshrc.${RESET}"
 
+	ln -s "$ZSH/templates/zshrc.zsh-template" ~/.zshrc
 	sed "/^export ZSH=/ c\\
 export ZSH=\"$ZSH\"
 " "$ZSH/templates/zshrc.zsh-template" > ~/.zshrc-omztemp
@@ -231,6 +229,50 @@ setup_shell() {
 	echo
 }
 
+# Ensure all required programs are installed
+checkPackages()
+{
+    unset MISSING
+
+    set +e
+
+    for PACKAGE in $1
+    do
+        if ! type $PACKAGE >/dev/null 2>&1; then
+            MISSING="$MISSING $PACKAGE"
+        fi
+    done
+
+    set -e
+
+    if [ -n "$MISSING" ]; then
+        echo Installing $MISSING
+        if [[ $EUID -ne 0 ]]; then
+            sudo apt-get install $MISSING
+        else
+            apt-get install $MISSING
+        fi
+    fi
+}
+
+installRequirements()
+{
+    checkPackages "zsh tmux command-not-found"
+
+    # FZF
+    if ! [ -x "$(command -v fzf)" ] && ! [ -d "~/.fzf" ]; then
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install --all
+    fi
+
+    # Powerline Font
+    git clone --depth=1 https://github.com/powerline/fonts.git ~/pwerline-font
+    cd ~/pwerline-font
+    ./install.sh
+    cd -
+    rm -rf ~/pwerline-font
+}
+
 main() {
 	# Run as unattended if stdin is closed
 	if [ ! -t 0 ]; then
@@ -249,6 +291,8 @@ main() {
 	done
 
 	setup_color
+	
+	installRequirements
 
 	if ! command_exists zsh; then
 		echo "${YELLOW}Zsh is not installed.${RESET} Please install zsh first."
