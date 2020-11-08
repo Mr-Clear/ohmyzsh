@@ -240,7 +240,7 @@ checkPackages()
 
     for PACKAGE in $1
     do
-        if ! type $PACKAGE >/dev/null 2>&1; then
+        if ! dpkg -l | grep -q $PACKAGE; then
             MISSING="$MISSING $PACKAGE"
         fi
     done
