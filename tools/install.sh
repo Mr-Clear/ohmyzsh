@@ -106,6 +106,8 @@ setup_ohmyzsh() {
 		error "git clone of oh-my-zsh repo failed"
 		exit 1
 	}
+	cd "$ZSH"
+	git submodule update --init --recursive
 
 	echo
 }
