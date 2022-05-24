@@ -39,6 +39,18 @@ case ${SOLARIZED_THEME:-dark} in
     *)     CURRENT_FG='black';;
 esac
 
+preexec () {
+   PREEXEC_TIME=$(date +%s)
+}
+
+precmd() {
+  PRECMD_TIME=$(date +%s)
+  if (( ${+PREEXEC_TIME} )); then
+    ((CMD_ELAPSED = $PRECMD_TIME - $PREEXEC_TIME))
+    unset PREEXEC_TIME
+  fi
+}
+
 # Special Powerline characters
 
 () {
@@ -330,6 +342,12 @@ prompt_aws() {
   esac
 }
 
+prompt_elapsed() {
+  if [[ $CMD_ELAPSED -gt 0 ]]; then
+    prompt_segment blue black $CMD_ELAPSED
+  fi
+}
+
 prompt_time() {
   CURRENT_DATE=$(date +"%Y-%m-%d")
   LAST_PROMPED_DATE=$(cat /dev/shm/last_prompted_date_$$ 2>/dev/null)
@@ -375,6 +393,7 @@ build_rprompt() {
   PROMPTLEFT=1
   rprompt_start
   prompt_processes
+  prompt_elapsed
   prompt_time
   prompt_level
   rprompt_end
