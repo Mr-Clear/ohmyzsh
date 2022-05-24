@@ -55,7 +55,7 @@ custom_zsh=${ZSH:+yes}
 ZSH=${ZSH:-~/.oh-my-zsh}
 REPO=${REPO:-Mr-Clear/omz.git}
 REMOTE=${REMOTE:-https://github.com/${REPO}}
-BRANCH=${BRANCH:-Arch}
+BRANCH=${BRANCH:-arch}
 
 # Other options
 CHSH=${CHSH:-yes}

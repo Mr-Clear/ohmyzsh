@@ -187,7 +187,7 @@ local ret=0
 
 # repository settings
 remote=${"$(git config --local oh-my-zsh.remote)":-origin}
-branch=${"$(git config --local oh-my-zsh.branch)":-master}
+branch=${"$(git config --local oh-my-zsh.branch)":-arch}
 
 # repository state
 last_head=$(git symbolic-ref --quiet --short HEAD || git rev-parse HEAD)
