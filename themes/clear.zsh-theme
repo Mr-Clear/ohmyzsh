@@ -331,25 +331,27 @@ prompt_aws() {
 }
 
 preexec () {
-   PREEXEC_TIME=$(date +%s)
+   PREEXEC_TIME=$(date +%s%3N)
 }
 
 precmd() {
-  PRECMD_TIME=$(date +%s)
+  PRECMD_TIME=$(date +%s%3N)
   if (( ${+PREEXEC_TIME} )); then
     ((CMD_ELAPSED = $PRECMD_TIME - $PREEXEC_TIME))
     unset PREEXEC_TIME
   fi
 }
 
-format_seconds()
+format_milliseconds()
 {
-  if [[ $1 -le 60 ]]; then
-    echo $1
+  ((ms = $1 % 1000))
+  ((s = $1 / 1000))
+  if [[ $s -le 59 ]]; then
+    printf "%d.%03d\n" $s $ms
   else
-    ((m = ($1 % 3600) / 60))
-    ((s = $1 % 60))
-    if [[ $1 -le 3600 ]]; then
+    ((m = ($s % 3600) / 60))
+    ((s = $s % 60))
+    if [[ $s -le 3600 ]]; then
       printf "%d:%02d\n" $m $s
     else
       ((h = $1 / 3600))
@@ -359,8 +361,8 @@ format_seconds()
 }
 
 prompt_elapsed() {
-  if [[ $CMD_ELAPSED -gt 0 ]]; then
-    prompt_segment blue black $(format_seconds $CMD_ELAPSED)
+  if (( ${+CMD_ELAPSED} )); then
+    prompt_segment blue black $(format_milliseconds $CMD_ELAPSED)
   fi
 }
 
