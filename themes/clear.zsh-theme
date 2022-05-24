@@ -39,18 +39,6 @@ case ${SOLARIZED_THEME:-dark} in
     *)     CURRENT_FG='black';;
 esac
 
-preexec () {
-   PREEXEC_TIME=$(date +%s)
-}
-
-precmd() {
-  PRECMD_TIME=$(date +%s)
-  if (( ${+PREEXEC_TIME} )); then
-    ((CMD_ELAPSED = $PRECMD_TIME - $PREEXEC_TIME))
-    unset PREEXEC_TIME
-  fi
-}
-
 # Special Powerline characters
 
 () {
@@ -342,9 +330,37 @@ prompt_aws() {
   esac
 }
 
+preexec () {
+   PREEXEC_TIME=$(date +%s)
+}
+
+precmd() {
+  PRECMD_TIME=$(date +%s)
+  if (( ${+PREEXEC_TIME} )); then
+    ((CMD_ELAPSED = $PRECMD_TIME - $PREEXEC_TIME))
+    unset PREEXEC_TIME
+  fi
+}
+
+format_seconds()
+{
+  if [[ $1 -le 60 ]]; then
+    echo $1
+  else
+    ((m = ($1 % 3600) / 60))
+    ((s = $1 % 60))
+    if [[ $1 -le 3600 ]]; then
+      printf "%d:%02d\n" $m $s
+    else
+      ((h = $1 / 3600))
+      printf "%d:%02d:%02d\n" $h $m $s
+    fi
+  fi
+}
+
 prompt_elapsed() {
   if [[ $CMD_ELAPSED -gt 0 ]]; then
-    prompt_segment blue black $CMD_ELAPSED
+    prompt_segment blue black $(format_seconds $CMD_ELAPSED)
   fi
 }
 
