@@ -330,6 +330,42 @@ prompt_aws() {
   esac
 }
 
+preexec () {
+   PREEXEC_TIME=$(date +%s%3N)
+}
+
+precmd() {
+  PRECMD_TIME=$(date +%s%3N)
+  if (( ${+PREEXEC_TIME} )); then
+    ((CMD_ELAPSED = $PRECMD_TIME - $PREEXEC_TIME))
+    unset PREEXEC_TIME
+  fi
+}
+
+format_milliseconds()
+{
+  ((ms = $1 % 1000))
+  ((s = $1 / 1000))
+  if [[ $s -le 59 ]]; then
+    printf "%d.%03d\n" $s $ms
+  else
+    ((m = ($s % 3600) / 60))
+    ((s = $s % 60))
+    if [[ $s -le 3600 ]]; then
+      printf "%d:%02d\n" $m $s
+    else
+      ((h = $1 / 3600))
+      printf "%d:%02d:%02d\n" $h $m $s
+    fi
+  fi
+}
+
+prompt_elapsed() {
+  if (( ${+CMD_ELAPSED} )); then
+    prompt_segment blue black $(format_milliseconds $CMD_ELAPSED)
+  fi
+}
+
 prompt_time() {
   CURRENT_DATE=$(date +"%Y-%m-%d")
   LAST_PROMPED_DATE=$(cat /dev/shm/last_prompted_date_$$ 2>/dev/null)
@@ -375,6 +411,7 @@ build_rprompt() {
   PROMPTLEFT=1
   rprompt_start
   prompt_processes
+  prompt_elapsed
   prompt_time
   prompt_level
   rprompt_end
