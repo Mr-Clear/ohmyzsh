@@ -346,15 +346,19 @@ format_milliseconds()
 {
   ((ms = $1 % 1000))
   ((s = $1 / 1000))
-  if [[ $s -le 59 ]]; then
+  if [[ $s -lt 10 ]]; then
     printf "%d.%03d\n" $s $ms
+  elif [[ $s -lt 60 ]]; then
+    ((ds = ($ms + 50) / 100))
+    printf "%d.%01d\n" $s $ds
   else
-    ((m = ($s % 3600) / 60))
+    ((m = $s / 60))
     ((s = $s % 60))
-    if [[ $s -le 3600 ]]; then
+    if [[ $m -lt 60 ]]; then
       printf "%d:%02d\n" $m $s
     else
-      ((h = $1 / 3600))
+      ((h = $m / 60))
+      ((m = $m % 60))
       printf "%d:%02d:%02d\n" $h $m $s
     fi
   fi
