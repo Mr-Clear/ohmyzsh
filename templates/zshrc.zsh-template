@@ -80,6 +80,7 @@ plugins=(
     dircycle
     dirpersist
     themes
+    virtualenv
 )
 
 export FZF_BASE="\${HOME}/.zshrc"
