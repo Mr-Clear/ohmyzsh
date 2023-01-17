@@ -303,6 +303,13 @@ prompt_virtualenv() {
   fi
 }
 
+# Anaconda environment
+prompt_conda() {
+  if [[ -v CONDA_DEFAULT_ENV && $CONDA_DEFAULT_ENV != "base" ]]; then
+    prompt_segment green white $CONDA_DEFAULT_ENV
+  fi
+}
+
 # Status:
 # - was there an error
 # - am I root
@@ -404,6 +411,7 @@ build_prompt() {
   prompt_context
   prompt_dir
 #  prompt_git
+  prompt_conda
   git_info
   prompt_retval
   prompt_end
