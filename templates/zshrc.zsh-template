@@ -107,6 +107,6 @@ export VISUAL=$EDITOR
 alias ll="ls -halFv --color=tty"
 
 # Run custom stuff
-if [ -f .zshrc2 ]; then
-    source .zshrc2
+if [ -f $HOME/.zshrc2 ]; then
+    source $HOME/.zshrc2
 fi
