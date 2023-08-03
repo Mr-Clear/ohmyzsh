@@ -562,6 +562,8 @@ EOF
     exit
   fi
 
+  git -C $HOME/.oh-my-zsh submodule update --init --recursive
+  
   exec zsh -l
 }
 
