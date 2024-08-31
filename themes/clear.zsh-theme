@@ -32,6 +32,8 @@
 ### Segment drawing
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
+ZLE_RPROMPT_INDENT=0
+
 CURRENT_BG='NONE'
 
 case ${SOLARIZED_THEME:-dark} in
@@ -146,7 +148,7 @@ git_info() {
 
   local AHEAD="%1{⇡%}NUM"
   local BEHIND="%1{⇣%}NUM"
-  local MERGING="%1{%F{red}⚡︎%f%}"
+  local MERGING="%1{%F{red}↯%f%}"
   local UNTRACKED="%1{%F{black}●%f%}"
   local MODIFIED="%1{%F{red}●%f%}"
   local STAGED="%1{%F{green}●%}%f"

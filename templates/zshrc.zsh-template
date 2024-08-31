@@ -1,13 +1,13 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to your Oh My Zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="clear"
 
 # Set list of themes to pick from when loading at random
@@ -25,7 +25,7 @@ ZSH_THEME="clear"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -104,9 +104,8 @@ export TIME_STYLE=+"%Y-%m-%d %H:%M:%S"
 export EDITOR=nano
 export VISUAL=$EDITOR
 
-alias ll="ls -halFv --color=tty"
 
 # Run custom stuff
-if [ -f .zshrc2 ]; then
-    source .zshrc2
+if [ -f $HOME/.zshrc2 ]; then
+    source $HOME/.zshrc2
 fi
