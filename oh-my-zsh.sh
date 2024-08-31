@@ -56,6 +56,7 @@ fi
 mkdir -p "$ZSH_CACHE_DIR/completions"
 (( ${fpath[(Ie)"$ZSH_CACHE_DIR/completions"]} )) || fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
+DISABLE_AUTO_UPDATE=true
 # Check for updates on initial load...
 source "$ZSH/tools/check_for_upgrade.sh"
 
