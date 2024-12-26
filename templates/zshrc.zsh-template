@@ -106,6 +106,6 @@ export VISUAL=$EDITOR
 
 
 # Run custom stuff
-if [ -f $HOME/.zshrc2 ]; then
-    source $HOME/.zshrc2
+if [ -f $HOME/.zshrcextra ]; then
+    source $HOME/.zshrcextra
 fi
