@@ -107,7 +107,12 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 #     print -z "tmux new-session -A -s \"ssh_tmux_$USER\"; exit \$?"
 # fi
 
-alias ll="ls -halFv --color=tty"
+if (( ${+commands[eza]} ))
+then
+    alias ll="eza -haal --color=always --icons=auto --group-directories-first --git"
+else
+    alias ll="ls -halFv --color=tty"
+fi
 
 # Output times in ISO 8601:
 export TIME_STYLE=+"%Y-%m-%d %H:%M:%S"
