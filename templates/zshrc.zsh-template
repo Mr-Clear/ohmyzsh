@@ -88,6 +88,18 @@ export FZF_BASE="\${HOME}/.zshrc"
 source $ZSH/oh-my-zsh.sh
 source /etc/zsh_command_not_found
 
+### Fix slowness of pastes with zsh-syntax-highlighting.zsh
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+### Fix slowness of pastes
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ### Offer to open tmux when in SSH ###
@@ -103,7 +115,6 @@ export TIME_STYLE=+"%Y-%m-%d %H:%M:%S"
 # Set the default editor
 export EDITOR=nano
 export VISUAL=$EDITOR
-
 
 # Run custom stuff
 if [ -f $HOME/.zshrcextra ]; then
