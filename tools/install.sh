@@ -515,7 +515,7 @@ checkPackages()
 
 installRequirements()
 {
-    checkPackages "zsh tmux command-not-found"
+    checkPackages "zsh tmux command-not-found git"
 
     # FZF
     if ! [ -x "$(command -v fzf)" ] && ! [ -d "~/.fzf" ]; then
