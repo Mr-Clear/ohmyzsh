@@ -113,6 +113,7 @@ then
 else
     alias ll="ls -halFv --color=tty"
 fi
+alias suco="sudo code --user-data-dir /root/.code --no-sandbox"
 
 # Output times in ISO 8601:
 export TIME_STYLE=+"%Y-%m-%d %H:%M:%S"
