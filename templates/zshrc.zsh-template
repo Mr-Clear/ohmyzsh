@@ -98,7 +98,7 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 export FZF_BASE="\${HOME}/.zshrc"
 
 source $ZSH/oh-my-zsh.sh
-source /etc/zsh_command_not_found
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
 ### Fix slowness of pastes with zsh-syntax-highlighting.zsh
 pasteinit() {
