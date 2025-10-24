@@ -506,9 +506,9 @@ checkPackages()
     if [ -n "$MISSING" ]; then
         echo Installing $MISSING
         if [[ $EUID -ne 0 ]]; then
-            sudo apt-get install $MISSING
+            sudo pacman -S $MISSING
         else
-            apt-get install $MISSING
+            pacman -S $MISSING
         fi
     fi
 }
@@ -549,7 +549,7 @@ main() {
   done
 
   setup_color
-	
+
   installRequirements
 
   if ! command_exists zsh; then
