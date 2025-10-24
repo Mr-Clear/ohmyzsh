@@ -68,7 +68,7 @@ ZSH="${ZSH:-$HOME/.oh-my-zsh}"
 
 # Default settings
 ZSH=${ZSH:-~/.oh-my-zsh}
-REPO=${REPO:-Mr-Clear/omz.git}
+REPO=${REPO:-Mr-Clear/ohmyzsh.git}
 REMOTE=${REMOTE:-https://github.com/${REPO}}
 BRANCH=${BRANCH:-arch}
 
